@@ -1,14 +1,18 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Today from "./Today";
+import WeeklyReport from "./WeeklyReport";
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [currentView, setCurrentView] = useState<"today" | "weekly">("today");
+
+  const navigateToWeekly = () => setCurrentView("weekly");
+  const navigateToToday = () => setCurrentView("today");
+
+  if (currentView === "weekly") {
+    return <WeeklyReport onNavigateToToday={navigateToToday} />;
+  }
+
+  return <Today onNavigateToWeekly={navigateToWeekly} />;
 };
 
 export default Index;
